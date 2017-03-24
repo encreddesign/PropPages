@@ -5,4 +5,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
+    <!-- Button Strings -->
+    <string name="base_button_text">Go PropPages</string>
+
 </resources>

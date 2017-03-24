@@ -1,4 +1,4 @@
-package com.app.proppgaes.utils;
+package com.app.proppages.utils;
 
 import android.util.Log;
 

@@ -1,9 +1,9 @@
-package com.app.proppgaes.view.model;
+package com.app.proppages.view.model;
 
 import android.app.Fragment;
 
-import com.app.proppgaes.utils.UtilBase;
-import com.app.proppgaes.utils.UtilClass;
+import com.app.proppages.utils.UtilBase;
+import com.app.proppages.utils.UtilClass;
 
 import java.io.Serializable;
 
@@ -31,12 +31,18 @@ public class FragmentModel implements Serializable {
     public FragmentModel setModel ( String name, int layoutId ) {
 
         this.layoutId = layoutId;
-        final Fragment fragment = (Fragment) UtilClass.getClassByName( name, UtilBase.PACKG_VIEW );
+        try {
 
-        if( fragment.getView() != null ) {
+            Fragment fragment = (Fragment) UtilClass.getClassByName( name, UtilBase.PACKG_VIEW );
 
-            this.layoutFragment = fragment;
+            if( fragment.getView() != null ) {
 
+                this.layoutFragment = fragment;
+
+            }
+
+        } catch (ClassCastException ex) {
+            throw new ClassCastException( "Unable to cast type Fragment to " + name );
         }
 
         return this;

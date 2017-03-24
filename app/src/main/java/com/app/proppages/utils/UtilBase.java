@@ -1,4 +1,4 @@
-package com.app.proppgaes.utils;
+package com.app.proppages.utils;
 
 /**
  * Created by Joshua on 23/03/17.

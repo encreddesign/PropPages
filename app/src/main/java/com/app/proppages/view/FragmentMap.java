@@ -1,12 +1,12 @@
-package com.app.proppgaes.view;
+package com.app.proppages.view;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 
-import com.app.proppgaes.utils.UtilBase;
-import com.app.proppgaes.utils.UtilClass;
-import com.app.proppgaes.view.model.FragmentModel;
+import com.app.proppages.view.model.FragmentModel;
+import com.app.proppages.utils.UtilBase;
+import com.app.proppages.utils.UtilClass;
 
 import java.util.ArrayList;
 
