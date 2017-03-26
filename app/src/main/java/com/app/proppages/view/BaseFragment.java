@@ -2,24 +2,42 @@ package com.app.proppages.view;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.app.proppages.R;
+import com.app.proppages.callbacks.DoLoadFragment;
+import com.app.proppages.utils.UtilBase;
 
 /**
  * Created by Joshua on 23/03/17.
  */
 public class BaseFragment extends Fragment {
 
-    public BaseFragment () {
-        // constructor here if needed which maybe needed
-    }
+    protected DoLoadFragment doLoadFragment;
+
+    private int lFragmentId = R.id.base_frame;
+    private String lFragmentLabel = "ProfilesFragment";
+
+    public BaseFragment () {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_base, container, false );
+        this.doLoadFragment = new DoLoadFragment( this.lFragmentLabel, this.lFragmentId, getActivity() );
+
+        Button loadFragment = (Button)view.findViewById(R.id.btn_go_proppages);
+        if( loadFragment != null ) {
+
+            loadFragment.setOnClickListener( this.doLoadFragment );
+
+        } else {
+            Log.e(UtilBase.LOG_TAG, "View component - loadFragment button not in view" );
+        }
 
         return view;
 

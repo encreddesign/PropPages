@@ -7,4 +7,8 @@
     <dimen name="base_button_padding">10dp</dimen>
     <dimen name="base_button_padding_width">20dp</dimen>
 
+    <!-- Profiles Dimen -->
+    <dimen name="profile_title_padding">10dp</dimen>
+    <dimen name="profile_title_size">15dp</dimen>
+
 </resources>

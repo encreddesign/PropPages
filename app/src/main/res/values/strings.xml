@@ -8,4 +8,7 @@
     <!-- Button Strings -->
     <string name="base_button_text">Go PropPages</string>
 
+    <!-- Profiles Strings -->
+    <string name="profiles_title">See all profiles</string>
+
 </resources>

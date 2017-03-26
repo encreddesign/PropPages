@@ -3,6 +3,7 @@ package com.app.proppages.view;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.util.Log;
 
 import com.app.proppages.view.model.FragmentModel;
 import com.app.proppages.utils.UtilBase;
@@ -39,7 +40,7 @@ public class FragmentMap {
     * @method replaceFragment
     * @params FragmentModel fm, boolean addToBackStack
     * */
-    public void replaceFragment ( FragmentModel fm, boolean addToBackStack ) {
+    public void replaceFragment ( FragmentModel fm, boolean animate, boolean addToBackStack ) {
 
         // begin a new transaction
         FragmentTransaction replaceTransaction = this.fManager.beginTransaction();
@@ -48,6 +49,12 @@ public class FragmentMap {
         if( addToBackStack ) {
 
             replaceTransaction.addToBackStack( fm.getFragmentLabel() );
+
+        }
+
+        if( animate ) {
+
+            replaceTransaction.setTransition( FragmentTransaction.TRANSIT_FRAGMENT_FADE );
 
         }
 
@@ -60,11 +67,11 @@ public class FragmentMap {
     * @params String name
     * @return fragment or null
     * */
-    public Fragment getFragment ( String name ) {
+    public static Fragment getFragment ( String name ) {
 
         final Fragment fragment = (Fragment)UtilClass.getClassByName( name, UtilBase.PACKG_VIEW );
 
-        if( fragment.getView() != null ) {
+        if( fragment != null ) {
 
             return fragment;
 

@@ -13,6 +13,7 @@ import java.io.Serializable;
 public class FragmentModel implements Serializable {
 
     private int layoutId;
+    private String fragmentName;
     private Fragment layoutFragment;
 
     public FragmentModel () {
@@ -31,11 +32,13 @@ public class FragmentModel implements Serializable {
     public FragmentModel setModel ( String name, int layoutId ) {
 
         this.layoutId = layoutId;
+        this.fragmentName = name;
+
         try {
 
             Fragment fragment = (Fragment) UtilClass.getClassByName( name, UtilBase.PACKG_VIEW );
 
-            if( fragment.getView() != null ) {
+            if( fragment != null ) {
 
                 this.layoutFragment = fragment;
 
@@ -65,7 +68,7 @@ public class FragmentModel implements Serializable {
     * */
     public String getFragmentLabel () {
 
-        return this.layoutFragment.getClass().getSimpleName();
+        return this.fragmentName;
 
     }
 
