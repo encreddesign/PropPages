@@ -33,7 +33,7 @@ public class BaseActivity extends Activity {
         this.mWorkerThread = new WorkerThread(wThreadLabel);
 
         // create a new instance of our background thread and pass our UI handler
-        this.mHttpBackgroundTask = HttpBackgroundTask.newInstance( this.getApplicationContext(), this.mUiHandler );
+        this.mHttpBackgroundTask = HttpBackgroundTask.newInstance( BaseActivity.this, this.mUiHandler );
 
         if( findViewById(R.id.base_frame) != null ) {
 

@@ -1,9 +1,13 @@
 package com.app.proppages.callbacks;
 
+import android.app.Activity;
+import android.app.Fragment;
 import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
+import android.view.View;
 
+import com.app.proppages.R;
 import com.app.proppages.http.ContentTypes;
 import com.app.proppages.http.PropHttp;
 import com.app.proppages.http.Routes;
@@ -14,17 +18,17 @@ import com.app.proppages.utils.UtilBase;
  */
 public class HttpBackgroundTask implements Runnable {
 
+    private Activity activity;
     // needed access to UIHandler thread
     private Handler hUiHandler;
-    private Context context;
 
     // http ready
     private PropHttp http;
 
-    public HttpBackgroundTask init ( Context context, Handler handler ) {
+    public HttpBackgroundTask init ( Activity activity, Handler handler ) {
 
         this.hUiHandler = handler;
-        this.http = PropHttp.newInstance(context).setup( Routes.PROFILES.route(), ContentTypes.JSON.type() );
+        this.http = PropHttp.newInstance(activity.getApplicationContext()).setup( Routes.PROFILES.route(), ContentTypes.JSON.type() );
 
         return this;
 
@@ -35,9 +39,14 @@ public class HttpBackgroundTask implements Runnable {
 
         // here we do our needed background http operation
         Log.d(UtilBase.LOG_TAG, "HttpBackgroundTask started...ready for http");
+        try {
 
-        // before we execute our http, quick update on UI
-        //this.hUiHandler.post( OnTaskUpdate.newInstance(message, view) );
+            // do pre loader
+            this.hUiHandler.post( OnPreTask.newInstance(EnumMessages.LOADING_PROFILES.message(), this.activity) );
+
+        } catch (Exception ex) {
+            Log.e( UtilBase.LOG_TAG, "Handler Error", ex );
+        }
 
         String response = this.http.get().stringResponse();
         if( response != null ) {
@@ -53,8 +62,8 @@ public class HttpBackgroundTask implements Runnable {
     /*
     * @method newInstance
     * */
-    public static HttpBackgroundTask newInstance ( Context context, Handler uiHandler ) {
-        return new HttpBackgroundTask().init( context, uiHandler );
+    public static HttpBackgroundTask newInstance ( Activity activity, Handler uiHandler ) {
+        return new HttpBackgroundTask().init( activity, uiHandler );
     }
 
 }
