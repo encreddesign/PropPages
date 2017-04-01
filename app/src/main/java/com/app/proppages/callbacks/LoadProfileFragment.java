@@ -12,7 +12,7 @@ import com.app.proppages.view.model.FragmentModel;
 /**
  * Created by Joshua on 24/03/17.
  */
-public class DoLoadFragment implements View.OnClickListener {
+public class LoadProfileFragment implements View.OnClickListener {
 
     // Needed variables
     private Activity activity;
@@ -21,7 +21,7 @@ public class DoLoadFragment implements View.OnClickListener {
     protected FragmentManager fManager;
     protected FragmentMap fMap;
 
-    public DoLoadFragment ( String fragmentName, int fragmentId, Activity activity ) {
+    public LoadProfileFragment(String fragmentName, int fragmentId, Activity activity) {
 
         this.activity = activity;
 
