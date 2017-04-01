@@ -9,7 +9,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.app.proppages.R;
-import com.app.proppages.callbacks.DoLoadFragment;
+import com.app.proppages.callbacks.HttpBackgroundTask;
+import com.app.proppages.callbacks.LoadProfileFragment;
 import com.app.proppages.utils.UtilBase;
 
 /**
@@ -17,10 +18,10 @@ import com.app.proppages.utils.UtilBase;
  */
 public class BaseFragment extends Fragment {
 
-    protected DoLoadFragment doLoadFragment;
-
     private int lFragmentId = R.id.base_frame;
     private String lFragmentLabel = "ProfilesFragment";
+
+    protected LoadProfileFragment loadProfileFragment;
 
     public BaseFragment () {}
 
@@ -28,12 +29,12 @@ public class BaseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_base, container, false );
-        this.doLoadFragment = new DoLoadFragment( this.lFragmentLabel, this.lFragmentId, getActivity() );
+        this.loadProfileFragment = new LoadProfileFragment( this.lFragmentLabel, this.lFragmentId, getActivity() );
 
         Button loadFragment = (Button)view.findViewById(R.id.btn_go_proppages);
         if( loadFragment != null ) {
 
-            loadFragment.setOnClickListener( this.doLoadFragment );
+            loadFragment.setOnClickListener( this.loadProfileFragment);
 
         } else {
             Log.e(UtilBase.LOG_TAG, "View component - loadFragment button not in view" );
