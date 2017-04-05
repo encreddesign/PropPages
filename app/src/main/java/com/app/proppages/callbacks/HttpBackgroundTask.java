@@ -13,6 +13,9 @@ import com.app.proppages.http.PropHttp;
 import com.app.proppages.http.Routes;
 import com.app.proppages.utils.UtilBase;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  * Created by Joshua on 29/03/17.
  */
@@ -45,13 +48,14 @@ public class HttpBackgroundTask implements Runnable {
             this.hUiHandler.post( OnPreTask.newInstance(EnumMessages.LOADING_PROFILES.message(), this.activity) );
 
         } catch (Exception ex) {
-            Log.e( UtilBase.LOG_TAG, "Handler Error", ex );
+            Log.e( UtilBase.LOG_TAG, "Task Error", ex );
         }
 
-        String response = this.http.get().stringResponse();
-        if( response != null ) {
+        ArrayList<HashMap<String, String>> response = this.http.get().hashMapResponse();
+        if( response.size() > 0 ) {
 
             Log.d( UtilBase.LOG_TAG, "Response Success we have our JSON" );
+            this.hUiHandler.post( UpdateForegroundTask.newInstance(this.activity, response) );
 
         } else {
             Log.e( UtilBase.LOG_TAG, "HttpBackgroundTask problem...no http response" );
