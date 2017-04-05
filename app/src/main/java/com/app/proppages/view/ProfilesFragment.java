@@ -29,7 +29,7 @@ public class ProfilesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profiles, container, false);
 
         final ListView listView = (ListView)view.findViewById(R.id.profiles_list);
-        //final ProfilesAdapter profilesAdapter = new ProfilesAdapter();
+        //final ProfilesAdapter profilesAdapter = new ProfilesAdapter( this, );
 
         return view;
 
