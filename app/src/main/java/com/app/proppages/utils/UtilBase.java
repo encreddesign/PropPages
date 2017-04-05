@@ -17,6 +17,38 @@ public class UtilBase {
     public static final String PACKG_APP = "com.app.proppages";
 
     /*
+    * @method toggleView
+    * */
+    public static void toggleView ( View view ) {
+
+        if( view.getVisibility() == View.VISIBLE ) {
+            view.setVisibility(View.INVISIBLE);
+        } else {
+            view.setVisibility(View.VISIBLE);
+        }
+
+    }
+
+    /*
+    * @method switchVisibility
+    * */
+    public static void switchVisibility ( View view, View with ) {
+
+        if( view.getVisibility() == View.VISIBLE ) {
+
+            view.setVisibility(View.INVISIBLE);
+            with.setVisibility(View.VISIBLE);
+
+        } else {
+
+            with.setVisibility(View.INVISIBLE);
+            view.setVisibility(View.VISIBLE);
+
+        }
+
+    }
+
+    /*
     * @method getCurrentView
     * */
     public static View getCurrentView ( Activity activity ) {
