@@ -15,12 +15,9 @@ public class BaseActivity extends Activity {
 
     // important handler for UI
     // VERY important, remove this and everything crumbles :(
-    protected Handler mUiHandler;
-    protected WorkerThread mWorkerThread;
+    public static Handler mUiHandler;
 
-    // our background task for http operations
-    private HttpBackgroundTask mHttpBackgroundTask;
-
+    public static WorkerThread mWorkerThread;
     private static final String wThreadLabel = "OurWorkingThread";
 
     @Override
@@ -29,11 +26,8 @@ public class BaseActivity extends Activity {
         setContentView(R.layout.activity_base);
 
         // register the UI handler
-        this.mUiHandler = new Handler();
-        this.mWorkerThread = new WorkerThread(wThreadLabel);
-
-        // create a new instance of our background thread and pass our UI handler
-        this.mHttpBackgroundTask = HttpBackgroundTask.newInstance( BaseActivity.this, this.mUiHandler );
+        mUiHandler = new Handler();
+        mWorkerThread = new WorkerThread(wThreadLabel);
 
         if( findViewById(R.id.base_frame) != null ) {
 
@@ -49,10 +43,9 @@ public class BaseActivity extends Activity {
         }
 
         // start our working thread
-        this.mWorkerThread.start();
+        mWorkerThread.start();
         // prepare our handler
-        this.mWorkerThread.prepHandler();
-        this.mWorkerThread.postTask(this.mHttpBackgroundTask);
+        mWorkerThread.prepHandler();
 
     }
 
@@ -83,8 +76,9 @@ public class BaseActivity extends Activity {
     @Override
     protected void onDestroy() {
 
-        this.mWorkerThread.quit();
+        mWorkerThread.quit();
         super.onDestroy();
 
     }
-}
+
+ }
