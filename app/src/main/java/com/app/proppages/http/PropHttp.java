@@ -37,6 +37,7 @@ public class PropHttp {
     private Context context;
 
     private String response;
+    private InputStream streamResponse;
     private PropNetwork pNetwork;
     private DefaultHttpClient dHttpClient;
     private List<NameValuePair> httpPostValues;
@@ -54,8 +55,9 @@ public class PropHttp {
 
     /*
     * @method get
+    * @params Boolean useStream
     * */
-    public PropHttp get () {
+    public PropHttp get ( boolean useStream ) {
 
         final HttpGet get = new HttpGet(this.url);
         try {
@@ -71,7 +73,13 @@ public class PropHttp {
             if( resp.getStatusLine().getStatusCode() >= HttpStatus.SC_BAD_REQUEST )
                 throw new HttpException("Unable to proccess request");
 
-            this.response = this.getContent(resp.getEntity().getContent());
+            if( useStream ) {
+
+                this.streamResponse = resp.getEntity().getContent();
+
+            } else {
+                this.response = this.getContent(resp.getEntity().getContent());
+            }
 
         } catch (NetworkException ex) {
             Log.e( UtilBase.LOG_TAG, "Network Error: ", ex );
@@ -165,6 +173,13 @@ public class PropHttp {
     * */
     public String stringResponse () {
         return this.response;
+    }
+
+    /*
+    * @method streamResponse
+    * */
+    public InputStream streamResponse () {
+        return this.streamResponse;
     }
 
     /*
