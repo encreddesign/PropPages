@@ -20,9 +20,8 @@ public class ProfileModel implements Serializable {
     * @method setProfile
     * @params String json
     * */
-    public ProfileModel init ( String json ) {
+    public ProfileModel init ( HashMap<String, String> map ) {
 
-        final HashMap<String, String> map = UtilJson.getHashMap(json);
         if( map != null && map.size() > 0 ) {
 
             this.values = map;
@@ -73,7 +72,7 @@ public class ProfileModel implements Serializable {
     /*
     * @method newInstance
     * */
-    public static ProfileModel newInstance ( String json ) {
+    public static ProfileModel newInstance ( HashMap<String, String> json ) {
         return new ProfileModel().init( json );
     }
 
