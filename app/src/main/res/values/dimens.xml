@@ -13,5 +13,13 @@
     <!-- Profiles Dimen -->
     <dimen name="profile_title_padding">10dp</dimen>
     <dimen name="profile_title_size">15dp</dimen>
+    <dimen name="profile_preview_imageSize">75dp</dimen>
+    <dimen name="profile_preview_paddingItem">3dp</dimen>
+    <dimen name="profile_preview_paddingImage">5dp</dimen>
+
+    <!-- Favs Icon -->
+    <dimen name="fav_icon_size">25dp</dimen>
+    <dimen name="fav_icon_padding">2dp</dimen>
+    <dimen name="fav_icon_margin">5dp</dimen>
 
 </resources>
