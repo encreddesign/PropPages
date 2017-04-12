@@ -1,12 +1,12 @@
 package com.app.proppages;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 
-import com.app.proppages.callbacks.HttpBackgroundTask;
-import com.app.proppages.callbacks.WorkerThread;
+import com.app.proppages.tasks.WorkerThread;
 import com.app.proppages.utils.UtilBase;
 import com.app.proppages.view.BaseFragment;
 import com.app.proppages.view.FragmentMap;
@@ -17,6 +17,8 @@ public class BaseActivity extends Activity {
     // VERY important, remove this and everything crumbles :(
     public static Handler mUiHandler;
 
+    private static Context mContext;
+
     public static WorkerThread mWorkerThread;
     private static final String wThreadLabel = "OurWorkingThread";
 
@@ -24,6 +26,8 @@ public class BaseActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
+
+        mContext = getApplicationContext();
 
         // register the UI handler
         mUiHandler = new Handler();
@@ -47,6 +51,10 @@ public class BaseActivity extends Activity {
         // prepare our handler
         mWorkerThread.prepHandler();
 
+    }
+
+    public static Context getContext () {
+        return mContext;
     }
 
     @Override
