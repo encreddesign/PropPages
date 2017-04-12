@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.app.proppages.BaseActivity;
+import com.app.proppages.tasks.HttpBackgroundTask;
 import com.app.proppages.utils.UtilBase;
 import com.app.proppages.view.FragmentMap;
 import com.app.proppages.view.model.FragmentModel;
