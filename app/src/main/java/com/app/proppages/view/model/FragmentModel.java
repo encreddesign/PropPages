@@ -1,6 +1,7 @@
 package com.app.proppages.view.model;
 
 import android.app.Fragment;
+import android.os.Bundle;
 
 import com.app.proppages.utils.UtilBase;
 import com.app.proppages.utils.UtilClass;
@@ -48,6 +49,17 @@ public class FragmentModel implements Serializable {
             throw new ClassCastException( "Unable to cast type Fragment to " + name );
         }
 
+        return this;
+
+    }
+
+    /*
+    * @method setData
+    * @params Bundle data
+    * */
+    public FragmentModel setData ( Bundle data ) {
+
+        this.layoutFragment.setArguments(data);
         return this;
 
     }
