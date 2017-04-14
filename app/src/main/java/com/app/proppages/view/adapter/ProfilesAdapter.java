@@ -1,6 +1,7 @@
 package com.app.proppages.view.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,10 +9,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.app.proppages.BaseActivity;
 import com.app.proppages.R;
-import com.app.proppages.http.ImageCache;
 import com.app.proppages.view.model.ProfileModel;
-
 import java.util.List;
 
 /**
@@ -34,9 +34,12 @@ public class ProfilesAdapter extends ArrayAdapter<ProfileModel> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View rowView = convertView;
 
-        final View rowView = inflater.inflate(R.layout.row_layout, parent, false);
+        if(rowView == null) {
+            LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            rowView = inflater.inflate(R.layout.row_layout, parent, false);
+        }
 
         TextView profileName = (TextView)rowView.findViewById(R.id.profile_prev_name);
         profileName.setText(
@@ -49,9 +52,9 @@ public class ProfilesAdapter extends ArrayAdapter<ProfileModel> {
         );
 
         ImageView profileImage = (ImageView)rowView.findViewById(R.id.profile_prev_img);
-        if( ImageCache.newInstance().getFromMem(this.values.get(position).getValue("image")) != null ) {
+        if( BaseActivity.getICache().getFromMem(this.values.get(position).getValue("image")) != null ) {
             profileImage.setImageBitmap(
-                    ImageCache.newInstance().getFromMem(this.values.get(position).getValue("image"))
+                    BaseActivity.getICache().getFromMem(this.values.get(position).getValue("image"))
             );
         }
 

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 
+import com.app.proppages.http.ImageCache;
 import com.app.proppages.tasks.WorkerThread;
 import com.app.proppages.utils.UtilBase;
 import com.app.proppages.view.BaseFragment;
@@ -18,6 +19,7 @@ public class BaseActivity extends Activity {
     public static Handler mUiHandler;
 
     private static Context mContext;
+    private static ImageCache iCache;
 
     public static WorkerThread mWorkerThread;
     private static final String wThreadLabel = "OurWorkingThread";
@@ -28,6 +30,7 @@ public class BaseActivity extends Activity {
         setContentView(R.layout.activity_base);
 
         mContext = getApplicationContext();
+        iCache = ImageCache.newInstance().init();
 
         // register the UI handler
         mUiHandler = new Handler();
@@ -55,6 +58,10 @@ public class BaseActivity extends Activity {
 
     public static Context getContext () {
         return mContext;
+    }
+
+    public static ImageCache getICache () {
+        return iCache;
     }
 
     @Override

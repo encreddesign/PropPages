@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.util.Log;
 
+import com.app.proppages.BaseActivity;
 import com.app.proppages.callbacks.ImageCacheCallback;
 import com.app.proppages.enums.EnumMessages;
 import com.app.proppages.enums.ContentTypes;
@@ -69,14 +70,12 @@ public class HttpBackgroundTask implements Runnable {
 
         if( data.size() > 0 ) {
 
-            final ImageCache cache = ImageCache.newInstance().init();
-
             for(HashMap<String, String> model : data) {
 
                 final String imgURI = ProfileModel.newInstance(model).getValue("image");
-                if( cache.getFromMem(imgURI) == null ) {
+                if( BaseActivity.getICache().getFromMem(imgURI) == null ) {
 
-                    cache.addToMemCache(
+                    BaseActivity.getICache().addToMemCache(
                             imgURI,
                             BitmapFactory.decodeStream(this.getHttpStreamRes( imgURI, ContentTypes.IMAGE_PNG.type() ))
                     );

@@ -47,7 +47,7 @@ public class ImageCache {
     * */
     public void addToMemCache ( String key, Bitmap bitmap ) {
 
-        if( this.getFromMem(key) != null ) {
+        if( this.getFromMem(key) == null ) {
 
             this.lruCache.put( key, bitmap );
             Log.d( UtilBase.LOG_TAG, ("Cached image " + key) );
@@ -68,7 +68,7 @@ public class ImageCache {
     * @method newInstance
     * */
     public static ImageCache newInstance () {
-        return new ImageCache().init();
+        return new ImageCache();
     }
 
 }

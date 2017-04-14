@@ -21,6 +21,11 @@
             android:textAllCaps="true"
             android:textSize="@dimen/profile_title_size"/>
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello"/>
+
         <ListView
             android:id="@+id/profiles_list"
             android:layout_width="fill_parent"

@@ -9,16 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.app.proppages.BaseActivity;
 import com.app.proppages.R;
 import com.app.proppages.callbacks.OnListItemSelect;
 import com.app.proppages.utils.UtilBase;
-import com.app.proppages.utils.UtilJson;
 import com.app.proppages.view.adapter.ProfilesAdapter;
 import com.app.proppages.view.model.ProfileModel;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
