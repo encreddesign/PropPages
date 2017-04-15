@@ -1,63 +1,68 @@
 package com.app.proppages.view.adapter;
 
-import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.app.proppages.BaseActivity;
 import com.app.proppages.R;
 import com.app.proppages.view.model.ProfileModel;
+
 import java.util.List;
 
 /**
- * Created by Joshua on 26/03/17.
+ * Created by Joshua on 15/04/17.
  */
-public class ProfilesAdapter extends ArrayAdapter<ProfileModel> {
+public class ProfilesAdapter extends RecyclerView.Adapter<ProfilesAdapter.ViewHolder> {
 
-    // variables
-    private Context context;
-    private List<ProfileModel> values;
+    private List<ProfileModel> dataSet;
 
-    public ProfilesAdapter ( Context context, List<ProfileModel> objects ) {
-        super(context, -1, objects);
+    public ProfilesAdapter (List<ProfileModel> dataSet) {
+        this.dataSet = dataSet;
+    }
 
-        this.context = context;
-        this.values = objects;
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+        final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_layout, parent, false);
+        final ViewHolder holder = new ViewHolder(view);
+
+        return holder;
 
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
 
-        View rowView = convertView;
+        // assign our values to view components
+        holder.mNameView.setText("TestName");
 
-        if(rowView == null) {
-            LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            rowView = inflater.inflate(R.layout.row_layout, parent, false);
-        }
-
-        TextView profileName = (TextView)rowView.findViewById(R.id.profile_prev_name);
-        profileName.setText(
-                this.values.get(position).getValue("name") + " " + this.values.get(position).getValue("lastname")
-        );
-
-        TextView profileTeam = (TextView)rowView.findViewById(R.id.profile_prev_team);
-        profileTeam.setText(
-                this.values.get(position).getValue("team")
-        );
-
-        ImageView profileImage = (ImageView)rowView.findViewById(R.id.profile_prev_img);
-        if( BaseActivity.getICache().getFromMem(this.values.get(position).getValue("image")) != null ) {
-            profileImage.setImageBitmap(
-                    BaseActivity.getICache().getFromMem(this.values.get(position).getValue("image"))
-            );
-        }
-
-        return rowView;
     }
+
+    // view holder
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+
+        public TextView mNameView;
+        public TextView mTeamView;
+        public ImageView mImageView;
+
+        public ViewHolder (View view) {
+            super(view);
+
+            mNameView = (TextView) view.findViewById(R.id.profile_prev_name);
+            mTeamView = (TextView) view.findViewById(R.id.profile_prev_team);
+            mImageView = (ImageView) view.findViewById(R.id.profile_prev_img);
+
+        }
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return this.dataSet.size();
+    }
+
 }

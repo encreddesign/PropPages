@@ -3,11 +3,12 @@ package com.app.proppages.view;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import com.app.proppages.R;
 import com.app.proppages.callbacks.OnListItemSelect;
@@ -22,12 +23,21 @@ import java.util.List;
  */
 public class ProfilesFragment extends Fragment {
 
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mRecyclerAdapter;
+    private RecyclerView.LayoutManager mRecyclerLayout;
+
     private OnListItemSelect listViewItemListener;
 
     public ProfilesFragment () {
 
         this.listViewItemListener = new OnListItemSelect();
 
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -40,11 +50,14 @@ public class ProfilesFragment extends Fragment {
             Log.e( UtilBase.LOG_TAG, "ProfileFragment bundle passed as null" );
         }
 
-        final ListView listView = (ListView)view.findViewById(R.id.profiles_list);
-        final ProfilesAdapter profilesAdapter = new ProfilesAdapter( view.getContext(), profileData );
+        this.mRecyclerView = (RecyclerView) view.findViewById(R.id.profiles_list);
+        this.mRecyclerView.setHasFixedSize(true);
 
-        listView.setAdapter(profilesAdapter);
-        listView.setOnItemClickListener(this.listViewItemListener);
+        this.mRecyclerLayout = new LinearLayoutManager(view.getContext());
+        this.mRecyclerView.setLayoutManager(this.mRecyclerLayout);
+
+        this.mRecyclerAdapter = new ProfilesAdapter(profileData);
+        this.mRecyclerView.setAdapter(this.mRecyclerAdapter);
 
         return view;
 
