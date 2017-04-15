@@ -76,8 +76,8 @@ public class HttpBackgroundTask implements Runnable {
                 if( BaseActivity.getICache().getFromMem(imgURI) == null ) {
 
                     BaseActivity.getICache().addToMemCache(
-                            imgURI,
-                            BitmapFactory.decodeStream(this.getHttpStreamRes( imgURI, ContentTypes.IMAGE_PNG.type() ))
+                        imgURI,
+                        BitmapFactory.decodeStream(this.getHttpStreamRes( imgURI, ContentTypes.IMAGE_PNG.type() ))
                     );
 
                 } else {
