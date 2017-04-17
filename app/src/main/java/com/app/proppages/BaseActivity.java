@@ -18,6 +18,7 @@ public class BaseActivity extends Activity {
     // VERY important, remove this and everything crumbles :(
     public static Handler mUiHandler;
 
+    private static Activity activity;
     private static Context mContext;
     private static ImageCache iCache;
 
@@ -29,6 +30,7 @@ public class BaseActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
 
+        activity = getActivity();
         mContext = getApplicationContext();
         iCache = ImageCache.newInstance().init();
 
@@ -59,6 +61,8 @@ public class BaseActivity extends Activity {
     public static Context getContext () {
         return mContext;
     }
+
+    public static Activity getActivity () { return activity; }
 
     public static ImageCache getICache () {
         return iCache;
