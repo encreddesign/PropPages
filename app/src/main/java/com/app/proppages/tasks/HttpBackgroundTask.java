@@ -24,7 +24,7 @@ import java.util.HashMap;
 /**
  * Created by Joshua on 29/03/17.
  */
-public class HttpBackgroundTask implements Runnable {
+public class HttpBackgroundTask extends HttpTaskAbstract implements Runnable {
 
     private Activity activity;
     // needed access to UIHandler thread
@@ -53,73 +53,10 @@ public class HttpBackgroundTask implements Runnable {
             Log.e( UtilBase.LOG_TAG, "Task Error", ex );
         }
 
-        String response = this.getHttpBasicRes( Routes.PROFILES.route(), ContentTypes.JSON.type() );
+        String response = this.getHttpBasicResponse( Routes.PROFILES.route(), ContentTypes.JSON.type() );
 
         // load profile images in mem cache first, so we can grab later
-        this.loadImageInCache( response, ImageCacheCallback.newInstance( this.activity, this.hUiHandler ) );
-
-    }
-
-    /*
-    * @method loadImageInCache
-    * */
-    private void loadImageInCache ( String response, OnDoneImageCache callback ) {
-
-        int cacheNum = 0;
-        final ArrayList<HashMap<String, String>> data = UtilJson.getAsArray(response);
-
-        if( data.size() > 0 ) {
-
-            for(HashMap<String, String> model : data) {
-
-                final String imgURI = ProfileModel.newInstance(model).getValue("image");
-                if( BaseActivity.getICache().getFromMem(imgURI) == null ) {
-
-                    BaseActivity.getICache().addToMemCache(
-                        imgURI,
-                        BitmapFactory.decodeStream(this.getHttpStreamRes( imgURI, ContentTypes.IMAGE_PNG.type() ))
-                    );
-
-                } else {
-
-                    cacheNum += 1;
-                    callback.processed(cacheNum);
-
-                }
-
-            }
-
-            callback.complete(response);
-
-        }
-
-    }
-
-    /*
-    * @method getHttpBasicRes
-    * */
-    private String getHttpBasicRes ( String route, String type ) {
-
-        final String res = PropHttp.newInstance(this.activity.getApplicationContext())
-                .setup( route, type )
-                .get(false)
-                .stringResponse();
-
-        return res;
-
-    }
-
-    /*
-    * @method getHttpStreamRes
-    * */
-    private InputStream getHttpStreamRes ( String route, String type ) {
-
-        final InputStream res = PropHttp.newInstance(this.activity.getApplicationContext())
-                .setup( route, type )
-                .get(true)
-                .streamResponse();
-
-        return res;
+        BaseActivity.getICache().loadImageInCache( response, this, ImageCacheCallback.newInstance( this.activity, this.hUiHandler ) );
 
     }
 
