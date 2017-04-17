@@ -38,6 +38,7 @@ public class PropHttp {
 
     private String response;
     private InputStream streamResponse;
+
     private PropNetwork pNetwork;
     private DefaultHttpClient dHttpClient;
     private List<NameValuePair> httpPostValues;
