@@ -1,10 +1,19 @@
 package com.app.proppages.http;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.util.LruCache;
 
+import com.app.proppages.BaseActivity;
+import com.app.proppages.enums.ContentTypes;
+import com.app.proppages.tasks.HttpTaskAbstract;
 import com.app.proppages.utils.UtilBase;
+import com.app.proppages.utils.UtilJson;
+import com.app.proppages.view.model.ProfileModel;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Joshua on 29/03/17.
@@ -38,6 +47,42 @@ public class ImageCache {
         }
 
         return this;
+
+    }
+
+    /*
+    * @method loadImageInCache
+    * @params String response, HttpTaskAbstract http, OnDoneImageCallback callback
+    * */
+    public void loadImageInCache ( String response, HttpTaskAbstract http, OnDoneImageCache callback ) {
+
+        int cacheNum = 0;
+        final ArrayList<HashMap<String, String>> data = UtilJson.getAsArray(response);
+
+        if( data.size() > 0 ) {
+
+            for(HashMap<String, String> model : data) {
+
+                final String imgURI = ProfileModel.newInstance(model).getValue("image");
+                if( BaseActivity.getICache().getFromMem(imgURI) == null ) {
+
+                    BaseActivity.getICache().addToMemCache(
+                            imgURI,
+                            BitmapFactory.decodeStream(http.getHttpStreamResponse(imgURI, ContentTypes.IMAGE_PNG.type()))
+                    );
+
+                } else {
+
+                    cacheNum += 1;
+                    callback.processed(cacheNum);
+
+                }
+
+            }
+
+            callback.complete(response);
+
+        }
 
     }
 
