@@ -1,45 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/profileCardView"
     android:layout_width="fill_parent"
-    android:layout_height="?android:attr/listPreferredItemHeight"
-    android:padding="@dimen/profile_preview_paddingItem">
+    android:layout_height="wrap_content"
+    android:padding="@dimen/profile_preview_paddingItem"
+    card_view:cardBackgroundColor="@color/color_white"
+    style="@style/CardView.Light">
 
-    <ImageView
-        android:id="@+id/profile_prev_img"
-        android:layout_width="@dimen/profile_preview_imageSize"
-        android:layout_height="@dimen/profile_preview_imageSize"
-        android:padding="@dimen/profile_preview_paddingImage"
-        android:contentDescription="@string/profile_image_label"
-        android:src="@drawable/ic_launcher"/>
-
-    <TextView
-        android:id="@+id/profile_prev_name"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/profileRowLayout"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/profile_prev_img"
-        android:textStyle="bold"
-        android:textSize="@dimen/profile_title_size"
-        android:text="@string/profile_placeholder_name"/>
+        android:padding="@dimen/profile_preview_paddingItem">
 
-    <TextView
-        android:id="@+id/profile_prev_team"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/profile_prev_name"
-        android:layout_toRightOf="@+id/profile_prev_img"
-        android:textSize="@dimen/profile_title_size"
-        android:text="@string/profile_placeholder_team"/>
+        <ImageView
+            android:id="@+id/profile_prev_img"
+            android:layout_width="@dimen/profile_preview_imageSize"
+            android:layout_height="@dimen/profile_preview_imageSize"
+            android:padding="@dimen/profile_preview_paddingImage"
+            android:contentDescription="@string/profile_image_label"
+            android:src="@drawable/ic_launcher"/>
 
-    <ImageView
-        android:id="@+id/profile_fav_icon"
-        android:layout_width="@dimen/fav_icon_size"
-        android:layout_height="@dimen/fav_icon_size"
-        android:layout_marginRight="@dimen/fav_icon_margin"
-        android:padding="@dimen/fav_icon_padding"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:src="@drawable/favs_icon"/>
+        <TextView
+            android:id="@+id/profile_prev_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/profile_prev_img"
+            android:textStyle="bold"
+            android:textSize="@dimen/profile_title_size"
+            android:text="@string/profile_placeholder_name"/>
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/profile_prev_team"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/profile_prev_name"
+            android:layout_toRightOf="@+id/profile_prev_img"
+            android:textSize="@dimen/profile_title_size"
+            android:text="@string/profile_placeholder_team"/>
+
+        <ImageView
+            android:id="@+id/profile_fav_icon"
+            android:layout_width="@dimen/fav_icon_size"
+            android:layout_height="@dimen/fav_icon_size"
+            android:layout_marginRight="@dimen/fav_icon_margin"
+            android:padding="@dimen/fav_icon_padding"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/favs_icon"/>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>
