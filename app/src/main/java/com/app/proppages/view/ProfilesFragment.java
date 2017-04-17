@@ -3,6 +3,8 @@ package com.app.proppages.view;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,10 +14,13 @@ import android.view.ViewGroup;
 
 import com.app.proppages.R;
 import com.app.proppages.callbacks.OnListItemSelect;
+import com.app.proppages.callbacks.SwipeRefreshListener;
 import com.app.proppages.utils.UtilBase;
 import com.app.proppages.view.adapter.ProfilesAdapter;
 import com.app.proppages.view.model.ProfileModel;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -26,8 +31,10 @@ public class ProfilesFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mRecyclerAdapter;
     private RecyclerView.LayoutManager mRecyclerLayout;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     private OnListItemSelect listViewItemListener;
+    private SwipeRefreshListener swipeRefreshListener;
 
     public ProfilesFragment () {
 
@@ -36,22 +43,23 @@ public class ProfilesFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_profiles, container, false);
+
+        this.swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.profilesRefreshLayout);
+        this.swipeRefreshListener = new SwipeRefreshListener(this.swipeRefreshLayout);
 
         final List<ProfileModel> profileData = (List<ProfileModel>) getArguments().getSerializable("data");
         if( profileData == null || profileData.size() == 0 ) {
             Log.e( UtilBase.LOG_TAG, "ProfileFragment bundle passed as null" );
         }
 
+        this.swipeRefreshLayout.setOnRefreshListener(this.swipeRefreshListener);
+
         this.mRecyclerView = (RecyclerView) view.findViewById(R.id.profiles_list);
         this.mRecyclerView.setHasFixedSize(true);
+        this.mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
         this.mRecyclerLayout = new LinearLayoutManager(view.getContext());
         this.mRecyclerView.setLayoutManager(this.mRecyclerLayout);

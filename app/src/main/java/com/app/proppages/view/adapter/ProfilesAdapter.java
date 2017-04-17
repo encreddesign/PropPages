@@ -1,5 +1,7 @@
 package com.app.proppages.view.adapter;
 
+import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.app.proppages.BaseActivity;
 import com.app.proppages.R;
 import com.app.proppages.view.model.ProfileModel;
 
@@ -37,8 +40,18 @@ public class ProfilesAdapter extends RecyclerView.Adapter<ProfilesAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
+        ProfileModel model = this.dataSet.get(position);
+
         // assign our values to view components
-        holder.mNameView.setText("TestName");
+        holder.mNameView.setText( (model.getValue("name") + " " + model.getValue("lastname")) );
+        holder.mTeamView.setText(model.getValue("team"));
+
+        Bitmap bitmap = BaseActivity.getICache().getFromMem(model.getValue("image"));
+        if(bitmap != null) {
+
+            holder.mImageView.setImageBitmap(bitmap);
+
+        }
 
     }
 
