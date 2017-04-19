@@ -3,6 +3,8 @@ package com.app.proppages.callbacks;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 
+import com.app.proppages.BaseActivity;
+import com.app.proppages.tasks.SwipeBackgroundTask;
 import com.app.proppages.utils.UtilBase;
 
 /**
@@ -24,6 +26,7 @@ public class SwipeRefreshListener implements SwipeRefreshLayout.OnRefreshListene
             if(this.currentSwipeLayout == null) throw new Exception("Swipe Layout not initialized");
 
             this.currentSwipeLayout.setRefreshing(true);
+            BaseActivity.mWorkerThread.postTask( SwipeBackgroundTask.newInstance(BaseActivity.mUiHandler) );
             Log.d( UtilBase.LOG_TAG, "Refreshing list..." );
 
         } catch (Exception ex) {
