@@ -29,16 +29,51 @@ import java.util.List;
 public class ProfilesFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mRecyclerAdapter;
     private RecyclerView.LayoutManager mRecyclerLayout;
-    private SwipeRefreshLayout swipeRefreshLayout;
+
+    private static final int INSERT_IDX = 0;
+    private static RecyclerView.Adapter mRecyclerAdapter;
+    private static SwipeRefreshLayout swipeRefreshLayout;
 
     private OnListItemSelect listViewItemListener;
     private SwipeRefreshListener swipeRefreshListener;
 
+    private static List<ProfileModel> profileData;
+
     public ProfilesFragment () {
 
         this.listViewItemListener = new OnListItemSelect();
+
+    }
+
+    /*
+    * @method addToList
+    * */
+    public static void addToList ( ProfileModel model ) {
+
+        profileData.add(INSERT_IDX, model);
+        mRecyclerAdapter.notifyDataSetChanged();
+
+        swipeRefreshLayout.setRefreshing(false);
+
+    }
+
+    /*
+    * @method updateList
+    * */
+    public static void updateList ( List<ProfileModel> models ) {
+
+        if( models.size() > 0 ) {
+
+            profileData.clear();
+            for(ProfileModel model : models) {
+                profileData.add(model);
+            }
+
+            mRecyclerAdapter.notifyDataSetChanged();
+            swipeRefreshLayout.setRefreshing(false);
+
+        }
 
     }
 
@@ -47,15 +82,15 @@ public class ProfilesFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_profiles, container, false);
 
-        this.swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.profilesRefreshLayout);
-        this.swipeRefreshListener = new SwipeRefreshListener(this.swipeRefreshLayout);
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.profilesRefreshLayout);
+        this.swipeRefreshListener = new SwipeRefreshListener(swipeRefreshLayout);
 
-        final List<ProfileModel> profileData = (List<ProfileModel>) getArguments().getSerializable("data");
+        profileData = (List<ProfileModel>) getArguments().getSerializable("data");
         if( profileData == null || profileData.size() == 0 ) {
             Log.e( UtilBase.LOG_TAG, "ProfileFragment bundle passed as null" );
         }
 
-        this.swipeRefreshLayout.setOnRefreshListener(this.swipeRefreshListener);
+        swipeRefreshLayout.setOnRefreshListener(this.swipeRefreshListener);
 
         this.mRecyclerView = (RecyclerView) view.findViewById(R.id.profiles_list);
         this.mRecyclerView.setHasFixedSize(true);
@@ -64,8 +99,8 @@ public class ProfilesFragment extends Fragment {
         this.mRecyclerLayout = new LinearLayoutManager(view.getContext());
         this.mRecyclerView.setLayoutManager(this.mRecyclerLayout);
 
-        this.mRecyclerAdapter = new ProfilesAdapter(profileData);
-        this.mRecyclerView.setAdapter(this.mRecyclerAdapter);
+        mRecyclerAdapter = new ProfilesAdapter(profileData);
+        this.mRecyclerView.setAdapter(mRecyclerAdapter);
 
         return view;
 
