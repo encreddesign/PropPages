@@ -11,9 +11,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.app.proppages.R;
 import com.app.proppages.callbacks.OnListItemSelect;
+import com.app.proppages.callbacks.SearchChangeListener;
 import com.app.proppages.callbacks.SwipeRefreshListener;
 import com.app.proppages.utils.UtilBase;
 import com.app.proppages.view.adapter.ProfilesAdapter;
@@ -38,6 +40,7 @@ public class ProfilesFragment extends Fragment {
     private OnListItemSelect listViewItemListener;
     private SwipeRefreshListener swipeRefreshListener;
 
+    private EditText mSearchField;
     private static List<ProfileModel> profileData;
 
     public ProfilesFragment () {
@@ -101,6 +104,9 @@ public class ProfilesFragment extends Fragment {
 
         mRecyclerAdapter = new ProfilesAdapter(profileData);
         this.mRecyclerView.setAdapter(mRecyclerAdapter);
+
+        this.mSearchField = (EditText) view.findViewById(R.id.profile_search);
+        this.mSearchField.addTextChangedListener(new SearchChangeListener(this.mRecyclerView, profileData));
 
         return view;
 
