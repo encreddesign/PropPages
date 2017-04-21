@@ -9,11 +9,13 @@
     <string name="base_button_text">Go PropPages</string>
 
     <!-- Profiles Strings -->
-    <string name="profiles_title">See all profiles</string>
+    <string name="profiles_title">Pull to Refresh</string>
 
     <!-- Profile String -->
     <string name="profile_image_label">Profile Image</string>
     <string name="profile_placeholder_name">[ Profile Name ]</string>
     <string name="profile_placeholder_team">[ Team ]</string>
+
+    <string name="search_placeholder">Search Team Member</string>
 
 </resources>

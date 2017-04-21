@@ -11,11 +11,12 @@
     <dimen name="loading_bar_size">80dp</dimen>
 
     <!-- Profiles Dimen -->
-    <dimen name="profile_title_padding">10dp</dimen>
+    <dimen name="profile_title_padding">5dp</dimen>
     <dimen name="profile_title_size">15dp</dimen>
     <dimen name="profile_preview_imageSize">75dp</dimen>
     <dimen name="profile_preview_paddingItem">3dp</dimen>
     <dimen name="profile_preview_paddingImage">5dp</dimen>
+    <dimen name="profile_edittext_padding">10dp</dimen>
 
     <!-- Favs Icon -->
     <dimen name="fav_icon_size">25dp</dimen>

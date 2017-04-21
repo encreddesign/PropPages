@@ -11,6 +11,17 @@
         android:layout_height="fill_parent"
         android:orientation="vertical">
 
+        <EditText
+            android:id="@+id/profile_search"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginRight="7dp"
+            android:hint="@string/search_placeholder"
+            android:padding="@dimen/profile_edittext_padding"
+            android:background="@drawable/edittext_base"/>
+
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
