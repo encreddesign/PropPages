@@ -7,6 +7,8 @@
 
     <!-- Button Strings -->
     <string name="base_button_text">Go PropPages</string>
+    <string name="profile_buttonEmail">Email</string>
+    <string name="profile_buttonCall">Call</string>
 
     <!-- Profiles Strings -->
     <string name="profiles_title">Pull to Refresh</string>

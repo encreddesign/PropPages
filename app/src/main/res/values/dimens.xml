@@ -6,6 +6,8 @@
     <!-- Button Dimen -->
     <dimen name="base_button_padding">10dp</dimen>
     <dimen name="base_button_padding_width">20dp</dimen>
+    <dimen name="small_button_padding">0dp</dimen>
+    <dimen name="small_button_paddingWidth">10dp</dimen>
 
     <!-- Progress Bar -->
     <dimen name="loading_bar_size">80dp</dimen>
@@ -17,6 +19,13 @@
     <dimen name="profile_preview_paddingItem">3dp</dimen>
     <dimen name="profile_preview_paddingImage">5dp</dimen>
     <dimen name="profile_edittext_padding">10dp</dimen>
+
+    <!-- Profile Scene -->
+    <dimen name="profile_scene_paddingTop">80dp</dimen>
+    <dimen name="profile_scene_imageSize">150dp</dimen>
+    <dimen name="profile_scene_imageMarginTop">-75dp</dimen>
+    <dimen name="profile_scene_infoBoxMargin">10dp</dimen>
+    <dimen name="profile_scene_buttonMargin">5dp</dimen>
 
     <!-- Favs Icon -->
     <dimen name="fav_icon_size">25dp</dimen>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:background="@color/color_white">
+    
+        <RelativeLayout
+            android:id="@+id/header_space"
+            android:layout_width="fill_parent"
+            android:layout_height="200dp"
+            android:background="@color/third_theme_color"></RelativeLayout>
+
+        <ImageView
+            android:id="@+id/profile_scene_image"
+            android:layout_width="@dimen/profile_scene_imageSize"
+            android:layout_height="@dimen/profile_scene_imageSize"
+            android:layout_below="@+id/header_space"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/profile_scene_imageMarginTop"
+            android:src="@drawable/ic_launcher"
+            android:background="@drawable/profile_image_bg"/>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/profile_scene_name"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/profile_title_padding"
+                android:gravity="center"
+                android:text="Profile Name"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                android:textSize="@dimen/profile_title_size"></TextView>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="@dimen/profile_scene_infoBoxMargin"
+                android:layout_marginRight="@dimen/profile_scene_infoBoxMargin"
+                android:layout_marginBottom="@dimen/profile_scene_infoBoxMargin"
+                android:weightSum="2"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/profile_scene_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="@dimen/profile_scene_buttonMargin"
+                    android:paddingTop="@dimen/small_button_padding"
+                    android:paddingBottom="@dimen/small_button_padding"
+                    android:paddingLeft="@dimen/small_button_paddingWidth"
+                    android:paddingRight="@dimen/small_button_paddingWidth"
+                    android:text="@string/profile_buttonEmail"
+                    android:textColor="@color/color_white"
+                    android:textStyle="bold"
+                    android:textAllCaps="true"
+                    android:background="@drawable/button_base"/>
+
+                <Button
+                    android:id="@+id/profile_scene_call"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="@dimen/profile_scene_buttonMargin"
+                    android:paddingTop="@dimen/small_button_padding"
+                    android:paddingBottom="@dimen/small_button_padding"
+                    android:paddingLeft="@dimen/small_button_paddingWidth"
+                    android:paddingRight="@dimen/small_button_paddingWidth"
+                    android:text="@string/profile_buttonCall"
+                    android:textColor="@color/color_white"
+                    android:textStyle="bold"
+                    android:textAllCaps="true"
+                    android:background="@drawable/button_base"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+        
+    </LinearLayout>
+
+</ScrollView>
