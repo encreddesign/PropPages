@@ -1,6 +1,7 @@
 package com.app.proppages;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,6 +22,7 @@ public class BaseActivity extends Activity {
     private static Activity activity;
     private static Context mContext;
     private static ImageCache iCache;
+    private static FragmentManager mFragmentManager;
 
     public static WorkerThread mWorkerThread;
     private static final String wThreadLabel = "OurWorkingThread";
@@ -33,6 +35,7 @@ public class BaseActivity extends Activity {
         activity = getActivity();
         mContext = getApplicationContext();
         iCache = ImageCache.newInstance().init();
+        mFragmentManager = getFragmentManager();
 
         // register the UI handler
         mUiHandler = new Handler();
@@ -62,10 +65,16 @@ public class BaseActivity extends Activity {
         return mContext;
     }
 
-    public static Activity getActivity () { return activity; }
+    public static Activity getActivity () {
+        return activity;
+    }
 
     public static ImageCache getICache () {
         return iCache;
+    }
+
+    public static FragmentManager getFManager () {
+        return mFragmentManager;
     }
 
     @Override
