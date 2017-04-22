@@ -15,7 +15,8 @@
         android:id="@+id/profileRowLayout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/profile_preview_paddingItem">
+        android:padding="@dimen/profile_preview_paddingItem"
+        android:background="?android:attr/selectableItemBackground">
 
         <ImageView
             android:id="@+id/profile_prev_img"
