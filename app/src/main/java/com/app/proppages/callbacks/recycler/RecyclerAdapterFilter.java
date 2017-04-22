@@ -1,7 +1,7 @@
 package com.app.proppages.callbacks.recycler;
 
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
+import android.util.Log;
 
 import com.app.proppages.BaseActivity;
 import com.app.proppages.view.model.ProfileModel;
@@ -72,7 +72,7 @@ public class RecyclerAdapterFilter implements RecyclerFilterInterface {
 
             mProfileData.clear();
 
-            if(TextUtils.isEmpty(chars)) {
+            if(chars.length() == 0) {
                 mProfileData.addAll(mCopyData);
             } else {
 

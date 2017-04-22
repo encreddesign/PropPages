@@ -29,24 +29,16 @@ public class SearchChangeListener implements TextWatcher {
     @Override
     public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
 
-        if(charSequence.length() > 0) {
-
-            // on text change, trigger filter method
-            this.mRecyclerAdapterFilter.onFilter(charSequence);
-
-        }
+        // on text change, trigger filter method
+        this.mRecyclerAdapterFilter.onFilter(charSequence);
 
     }
 
     @Override
     public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
 
-        if(charSequence.length() > 0) {
-
-            // on text change, trigger filter method
-            this.mRecyclerAdapterFilter.onStartFilter(charSequence);
-
-        }
+        // on text change, trigger filter method
+        this.mRecyclerAdapterFilter.onStartFilter(charSequence);
 
     }
 
