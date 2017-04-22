@@ -21,8 +21,6 @@ import com.app.proppages.utils.UtilBase;
 import com.app.proppages.view.adapter.ProfilesAdapter;
 import com.app.proppages.view.model.ProfileModel;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -102,7 +100,7 @@ public class ProfilesFragment extends Fragment {
         this.mRecyclerLayout = new LinearLayoutManager(view.getContext());
         this.mRecyclerView.setLayoutManager(this.mRecyclerLayout);
 
-        mRecyclerAdapter = new ProfilesAdapter(profileData);
+        mRecyclerAdapter = new ProfilesAdapter(profileData, this.listViewItemListener);
         this.mRecyclerView.setAdapter(mRecyclerAdapter);
 
         this.mSearchField = (EditText) view.findViewById(R.id.profile_search);
