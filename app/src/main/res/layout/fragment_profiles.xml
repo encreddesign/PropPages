@@ -19,6 +19,8 @@
             android:layout_marginTop="7dp"
             android:layout_marginRight="7dp"
             android:hint="@string/search_placeholder"
+            android:maxLines="1"
+            android:focusableInTouchMode="true"
             android:padding="@dimen/profile_edittext_padding"
             android:background="@drawable/edittext_base"/>
 

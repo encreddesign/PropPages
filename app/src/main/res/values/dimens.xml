@@ -26,6 +26,8 @@
     <dimen name="profile_scene_imageMarginTop">-75dp</dimen>
     <dimen name="profile_scene_infoBoxMargin">10dp</dimen>
     <dimen name="profile_scene_buttonMargin">5dp</dimen>
+    <dimen name="profile_scene_teamMarginTop">30dp</dimen>
+    <dimen name="profile_scene_teamFontSize">20dp</dimen>
 
     <!-- Favs Icon -->
     <dimen name="fav_icon_size">25dp</dimen>

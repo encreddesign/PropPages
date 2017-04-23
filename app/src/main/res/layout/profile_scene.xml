@@ -14,7 +14,32 @@
             android:id="@+id/header_space"
             android:layout_width="fill_parent"
             android:layout_height="200dp"
-            android:background="@color/third_theme_color"></RelativeLayout>
+            android:background="@color/third_theme_color">
+
+            <TextView
+                android:id="@+id/profile_team_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/profile_scene_teamMarginTop"
+                android:layout_centerHorizontal="true"
+                android:text="@string/profile_placeholder_team"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/profile_scene_teamFontSize"/>
+
+            <TextView
+                android:id="@+id/profile_team_position"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/profile_team_name"
+                android:layout_centerHorizontal="true"
+                android:text="@string/profile_placeholder_position"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                android:textSize="@dimen/profile_title_size"/>
+
+        </RelativeLayout>
 
         <ImageView
             android:id="@+id/profile_scene_image"
@@ -42,10 +67,94 @@
                 android:textAllCaps="true"
                 android:textSize="@dimen/profile_title_size"></TextView>
 
+            <TextView
+                android:id="@+id/profile_scene_holiday"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/profile_team_name"
+                android:gravity="center"
+                android:text="@string/profile_placeholder_holiday"
+                android:textStyle="bold"
+                android:textColor="@color/color_red"
+                android:textAllCaps="true"
+                android:textSize="@dimen/profile_title_size"
+                android:visibility="gone"/>
+
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
+                android:layout_marginLeft="@dimen/profile_scene_infoBoxMargin"
+                android:layout_marginRight="@dimen/profile_scene_infoBoxMargin"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/profile_scene_nickname"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/profile_title_padding"
+                    android:gravity="left"
+                    android:text="Nickname:"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/profile_title_size"></TextView>
+
+                <TextView
+                    android:id="@+id/profile_scene_emailText"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/profile_title_padding"
+                    android:gravity="left"
+                    android:text="Email:"
+                    android:textStyle="bold"
+                    android:autoLink="email"
+                    android:textSize="@dimen/profile_title_size"></TextView>
+
+                <TextView
+                    android:id="@+id/profile_scene_callText"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/profile_title_padding"
+                    android:gravity="left"
+                    android:text="Extension:"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/profile_title_size"></TextView>
+
+                <TextView
+                    android:id="@+id/profile_scene_office"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/profile_title_padding"
+                    android:gravity="left"
+                    android:text="Office:"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/profile_title_size"></TextView>
+
+                <TextView
+                    android:id="@+id/profile_scene_film"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/profile_title_padding"
+                    android:gravity="left"
+                    android:text="Favourite Film:"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/profile_title_size"></TextView>
+
+                <TextView
+                    android:id="@+id/profile_scene_song"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/profile_title_padding"
+                    android:gravity="left"
+                    android:text="Favourite Song:"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/profile_title_size"></TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:layout_marginLeft="@dimen/profile_scene_infoBoxMargin"
                 android:layout_marginRight="@dimen/profile_scene_infoBoxMargin"
                 android:layout_marginBottom="@dimen/profile_scene_infoBoxMargin"
@@ -66,6 +175,7 @@
                     android:textColor="@color/color_white"
                     android:textStyle="bold"
                     android:textAllCaps="true"
+                    android:autoLink="email"
                     android:background="@drawable/button_base"/>
 
                 <Button
