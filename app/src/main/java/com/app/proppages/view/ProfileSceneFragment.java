@@ -22,7 +22,18 @@ import com.app.proppages.view.model.ProfileModel;
 public class ProfileSceneFragment extends Fragment {
 
     private TextView mProfileName;
+    private TextView mProfileTeam;
+    private TextView mProfilePosition;
+    private TextView mProfileNickname;
+    private TextView mProfileEmail;
+    private TextView mProfileExtension;
+    private TextView mProfileOffice;
+    private TextView mProfileFilm;
+    private TextView mProfileSong;
+    private TextView mProfileHoliday;
+
     private ImageView mProfileImage;
+
     private Button mProfileCallButton;
     private Button mProfileEmailButton;
 
@@ -36,7 +47,19 @@ public class ProfileSceneFragment extends Fragment {
         View view = inflater.inflate(R.layout.profile_scene, container, false);
 
         this.mProfileName = (TextView) view.findViewById(R.id.profile_scene_name);
+        this.mProfileTeam = (TextView) view.findViewById(R.id.profile_team_name);
+        this.mProfilePosition = (TextView) view.findViewById(R.id.profile_team_position);
+
+        this.mProfileNickname = (TextView) view.findViewById(R.id.profile_scene_nickname);
+        this.mProfileEmail = (TextView) view.findViewById(R.id.profile_scene_emailText);
+        this.mProfileExtension = (TextView) view.findViewById(R.id.profile_scene_callText);
+        this.mProfileOffice = (TextView) view.findViewById(R.id.profile_scene_office);
+        this.mProfileFilm = (TextView) view.findViewById(R.id.profile_scene_film);
+        this.mProfileSong = (TextView) view.findViewById(R.id.profile_scene_song);
+        this.mProfileHoliday = (TextView) view.findViewById(R.id.profile_scene_holiday);
+
         this.mProfileImage = (ImageView) view.findViewById(R.id.profile_scene_image);
+
         this.mProfileCallButton = (Button) view.findViewById(R.id.profile_scene_call);
         this.mProfileEmailButton = (Button) view.findViewById(R.id.profile_scene_email);
 
@@ -46,6 +69,20 @@ public class ProfileSceneFragment extends Fragment {
         }
 
         this.mProfileName.setText( (this.mProfileModel.getValue("name") + " " + this.mProfileModel.getValue("lastname")) );
+        this.mProfileTeam.setText(this.mProfileModel.getValue("team"));
+        this.mProfilePosition.setText(this.mProfileModel.getValue("position"));
+
+        if( this.isHoliday() ) {
+            this.mProfileHoliday.setVisibility(View.VISIBLE);
+            this.mProfileCallButton.setEnabled(false);
+        }
+
+        this.mProfileNickname.setText( ("Nickname: " + this.mProfileModel.getValue("nicknames")) );
+        this.mProfileEmail.setText( ("Email: " + this.mProfileModel.getValue("email")) );
+        this.mProfileExtension.setText( ("Extension: " + this.mProfileModel.getValue("ext")) );
+        this.mProfileOffice.setText( ("Office: " + this.mProfileModel.getValue("office")) );
+        this.mProfileFilm.setText( ("Favourite Film: " + this.mProfileModel.getValue("film")) );
+        this.mProfileSong.setText( ("Favourite Song: " + this.mProfileModel.getValue("song")) );
 
         Bitmap bitmap = BaseActivity.getICache().getFromMem(this.mProfileModel.getValue("image"));
         if(bitmap != null) {
@@ -53,6 +90,19 @@ public class ProfileSceneFragment extends Fragment {
         }
 
         return view;
+
+    }
+
+    /*
+    * @method isHoliday
+    * */
+    private boolean isHoliday () {
+
+        if( this.mProfileModel.getBoolValue("holiday") ) {
+            return true;
+        }
+
+        return false;
 
     }
 
