@@ -52,7 +52,7 @@ public class FavouritesTable {
     /*
     * @method findProfileByName
     * */
-    public Cursor findProfileById (String profileName) {
+    public Cursor findProfileByName (String profileName) {
 
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_PROFILE_NAME + " =?";
 
