@@ -7,11 +7,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 
-import com.app.proppages.http.ImageCache;
+import com.app.proppages.db.FavouritesMap;
+import com.app.proppages.http.images.ImageCache;
+import com.app.proppages.tasks.SwipeBackgroundTask;
 import com.app.proppages.tasks.WorkerThread;
 import com.app.proppages.utils.UtilBase;
 import com.app.proppages.view.BaseFragment;
 import com.app.proppages.view.FragmentMap;
+import com.app.proppages.view.ProfilesFragment;
 
 public class BaseActivity extends Activity {
 
@@ -23,6 +26,8 @@ public class BaseActivity extends Activity {
     private static Context mContext;
     private static ImageCache iCache;
     private static FragmentManager mFragmentManager;
+
+    private static FavouritesMap mFavouritesMap;
 
     public static WorkerThread mWorkerThread;
     private static final String wThreadLabel = "OurWorkingThread";
@@ -54,6 +59,9 @@ public class BaseActivity extends Activity {
 
         }
 
+        // setup db
+        mFavouritesMap = FavouritesMap.newInstance(mContext);
+
         // start our working thread
         mWorkerThread.start();
         // prepare our handler
@@ -75,6 +83,10 @@ public class BaseActivity extends Activity {
 
     public static FragmentManager getFManager () {
         return mFragmentManager;
+    }
+
+    public static FavouritesMap getFavouritesMap () {
+        return mFavouritesMap;
     }
 
     @Override
@@ -105,6 +117,8 @@ public class BaseActivity extends Activity {
     protected void onDestroy() {
 
         mWorkerThread.quit();
+        mFavouritesMap.close();
+
         super.onDestroy();
 
     }
