@@ -9,16 +9,22 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.app.proppages.R;
 import com.app.proppages.callbacks.OnListItemSelect;
 import com.app.proppages.callbacks.SearchChangeListener;
 import com.app.proppages.callbacks.SwipeRefreshListener;
+import com.app.proppages.http.PropNetwork;
 import com.app.proppages.utils.UtilBase;
 import com.app.proppages.view.adapter.ProfilesAdapter;
+import com.app.proppages.view.model.FragmentModel;
 import com.app.proppages.view.model.ProfileModel;
 
 import java.util.List;
@@ -42,9 +48,7 @@ public class ProfilesFragment extends Fragment {
     private static List<ProfileModel> profileData;
 
     public ProfilesFragment () {
-
         this.listViewItemListener = new OnListItemSelect();
-
     }
 
     /*
@@ -76,6 +80,12 @@ public class ProfilesFragment extends Fragment {
 
         }
 
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -111,8 +121,40 @@ public class ProfilesFragment extends Fragment {
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+
+        inflater.inflate(R.menu.base, menu);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+
+            case R.id.action_favourites:
+                new FragmentMap(getFragmentManager())
+                        .replaceFragment(new FragmentModel().setModel("FavouritesFragment", R.id.base_frame), true, true);
+                break;
+
+            default:
+                break;
+
+        }
+
+        return true;
+
+    }
+
+    @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+
+        if(!PropNetwork.newInstance().check(activity.getApplicationContext()).isOnline()) {
+            Toast.makeText(activity.getApplicationContext(), "Device offline", Toast.LENGTH_LONG).show();
+        }
+
         Log.d(UtilBase.LOG_TAG, "Attached view");
     }
 }

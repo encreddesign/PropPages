@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.app.proppages.BaseActivity;
+import com.app.proppages.http.PropNetwork;
 import com.app.proppages.tasks.HttpBackgroundTask;
 import com.app.proppages.utils.UtilBase;
 import com.app.proppages.view.FragmentMap;
@@ -43,10 +45,16 @@ public class LoadProfileFragment implements View.OnClickListener {
         // Do the loading of another fragment
         if( !FragmentMap.getFragment(fModel.getFragmentLabel()).isVisible() ) {
 
-            // post http task
-            // create a new instance of our background thread and pass our UI handler
-            this.mHttpBackgroundTask = HttpBackgroundTask.newInstance( this.activity, BaseActivity.mUiHandler );
-            BaseActivity.mWorkerThread.postTask(this.mHttpBackgroundTask);
+            if(!PropNetwork.newInstance().check(activity.getApplicationContext()).isOnline()) {
+                Toast.makeText(activity.getApplicationContext(), "Device offline, try again", Toast.LENGTH_LONG).show();
+            } else {
+
+                // post http task
+                // create a new instance of our background thread and pass our UI handler
+                this.mHttpBackgroundTask = HttpBackgroundTask.newInstance( this.activity, BaseActivity.mUiHandler );
+                BaseActivity.mWorkerThread.postTask(this.mHttpBackgroundTask);
+
+            }
 
         } else {
             Log.w( UtilBase.LOG_TAG, "Fragment already in view" );

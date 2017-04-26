@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.app.proppages.BaseActivity;
 import com.app.proppages.R;
@@ -36,6 +37,7 @@ public class ProfileSceneFragment extends Fragment {
 
     private Button mProfileCallButton;
     private Button mProfileEmailButton;
+    private Button mProfileFavsButton;
 
     private ProfileModel mProfileModel;
 
@@ -62,6 +64,7 @@ public class ProfileSceneFragment extends Fragment {
 
         this.mProfileCallButton = (Button) view.findViewById(R.id.profile_scene_call);
         this.mProfileEmailButton = (Button) view.findViewById(R.id.profile_scene_email);
+        this.mProfileFavsButton = (Button) view.findViewById(R.id.profile_scene_favs);
 
         this.mProfileModel = (ProfileModel) getArguments().getSerializable("data");
         if( this.mProfileModel == null ) {
@@ -72,9 +75,17 @@ public class ProfileSceneFragment extends Fragment {
         this.mProfileTeam.setText(this.mProfileModel.getValue("team"));
         this.mProfilePosition.setText(this.mProfileModel.getValue("position"));
 
+        // check for holiday
         if( this.isHoliday() ) {
+
             this.mProfileHoliday.setVisibility(View.VISIBLE);
-            this.mProfileCallButton.setEnabled(false);
+            UtilBase.disableView(this.mProfileCallButton, null);
+
+        }
+
+        // check for database favourites existence
+        if( this.isInFavourites() ) {
+            this.mProfileFavsButton.setText("Remove Favourite");
         }
 
         this.mProfileNickname.setText( ("Nickname: " + this.mProfileModel.getValue("nicknames")) );
@@ -89,7 +100,50 @@ public class ProfileSceneFragment extends Fragment {
             this.mProfileImage.setImageBitmap(bitmap);
         }
 
+        // final is binding events
+        this.addBindings(this.mProfileModel);
+
         return view;
+
+    }
+
+    /*
+    * @method addBindings
+    * */
+    private void addBindings (final ProfileModel model) {
+
+        this.mProfileFavsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(BaseActivity.getFavouritesMap().findProfileById(model.getIntValue("id")) != null) {
+
+                    BaseActivity.getFavouritesMap().deleteProfile(model.getIntValue("id"));
+                    Toast.makeText(BaseActivity.getContext(), "Removed Favourite", Toast.LENGTH_LONG).show();
+                    ((Button) view).setText("Add To Favourites");
+
+                } else {
+
+                    BaseActivity.getFavouritesMap().addProfile(model);
+                    ((Button) view).setText("Remove Favourite");
+
+                }
+
+            }
+        });
+
+    }
+
+    /*
+    * @method isInFavourites
+    * */
+    private boolean isInFavourites () {
+
+        if( BaseActivity.getFavouritesMap().findProfileById(this.mProfileModel.getIntValue("id")) != null ) {
+            return true;
+        }
+
+        return false;
 
     }
 
