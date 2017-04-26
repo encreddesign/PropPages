@@ -1,2 +1,2 @@
 # PropPages
-Propeller pages android app
+Propeller pages android test app
