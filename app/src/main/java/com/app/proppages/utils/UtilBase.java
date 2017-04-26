@@ -1,7 +1,10 @@
 package com.app.proppages.utils;
 
 import android.app.Activity;
+import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 /**
  * Created by Joshua on 23/03/17.
@@ -43,6 +46,46 @@ public class UtilBase {
 
             with.setVisibility(View.INVISIBLE);
             view.setVisibility(View.VISIBLE);
+
+        }
+
+    }
+
+    /*
+    * @method disableView
+    * */
+    public static void disableView ( View view, String disabledText ) {
+
+        view.setAlpha(0.5f);
+        view.setEnabled(false);
+
+        if(disabledText != null) {
+
+            if(view instanceof Button) {
+                ((Button) view).setText(disabledText);
+            } else if(view instanceof TextView) {
+                ((TextView) view).setText(disabledText);
+            }
+
+        }
+
+    }
+
+    /*
+    * @method enableView
+    * */
+    public static void enableView ( View view, String enabledText ) {
+
+        view.setAlpha(1);
+        view.setEnabled(true);
+
+        if(enabledText != null) {
+
+            if(view instanceof Button) {
+                ((Button) view).setText(enabledText);
+            } else if(view instanceof TextView) {
+                ((TextView) view).setText(enabledText);
+            }
 
         }
 
