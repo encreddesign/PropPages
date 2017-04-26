@@ -52,8 +52,10 @@
             android:background="@drawable/profile_image_bg"/>
 
         <LinearLayout
-            android:layout_width="fill_parent"
+            android:layout_width="@dimen/profile_scene_infoBoxWidth"
             android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_gravity="center_horizontal"
             android:orientation="vertical">
 
             <TextView
@@ -157,7 +159,6 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="@dimen/profile_scene_infoBoxMargin"
                 android:layout_marginRight="@dimen/profile_scene_infoBoxMargin"
-                android:layout_marginBottom="@dimen/profile_scene_infoBoxMargin"
                 android:weightSum="2"
                 android:orientation="horizontal">
 
@@ -192,6 +193,32 @@
                     android:textColor="@color/color_white"
                     android:textStyle="bold"
                     android:textAllCaps="true"
+                    android:background="@drawable/button_base"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/profile_scene_infoBoxMargin"
+                android:layout_marginRight="@dimen/profile_scene_infoBoxMargin"
+                android:layout_marginBottom="@dimen/profile_scene_infoBoxMargin"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/profile_scene_favs"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/profile_scene_buttonMargin"
+                    android:paddingTop="@dimen/small_button_padding"
+                    android:paddingBottom="@dimen/small_button_padding"
+                    android:paddingLeft="@dimen/small_button_paddingWidth"
+                    android:paddingRight="@dimen/small_button_paddingWidth"
+                    android:text="@string/profile_buttonFavs"
+                    android:textColor="@color/color_white"
+                    android:textStyle="bold"
+                    android:textAllCaps="true"
+                    android:autoLink="email"
                     android:background="@drawable/button_base"/>
 
             </LinearLayout>

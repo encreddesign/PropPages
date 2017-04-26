@@ -25,6 +25,7 @@
     <dimen name="profile_scene_imageSize">150dp</dimen>
     <dimen name="profile_scene_imageMarginTop">-75dp</dimen>
     <dimen name="profile_scene_infoBoxMargin">10dp</dimen>
+    <dimen name="profile_scene_infoBoxWidth">350dp</dimen>
     <dimen name="profile_scene_buttonMargin">5dp</dimen>
     <dimen name="profile_scene_teamMarginTop">30dp</dimen>
     <dimen name="profile_scene_teamFontSize">20dp</dimen>
