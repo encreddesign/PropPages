@@ -21,7 +21,7 @@ public class FavouritesTable {
     public static final String COLUMN_PROFILE_NAME = "profileName";
     public static final String COLUMN_PROFILE_LASTNAME = "profileLastname";
     public static final String COLUMN_PROFILE_TEAM = "profileTeam";
-    public static final String COLUMN_PROFILE_EMAIL = "profileTeam";
+    public static final String COLUMN_PROFILE_EMAIL = "profileEmail";
     public static final String COLUMN_PROFILE_EXT = "profileExt";
     public static final String COLUMN_PROFILE_POSITION = "profilePosition";
     public static final String COLUMN_PROFILE_NICKNAME = "profileNickname";
@@ -40,6 +40,7 @@ public class FavouritesTable {
 
     /*
     * @method findProfileById
+    * @params Integer profileId
     * */
     public Cursor findProfileById (int profileId) {
 
@@ -51,12 +52,24 @@ public class FavouritesTable {
 
     /*
     * @method findProfileByName
+    * @params String profileName
     * */
     public Cursor findProfileByName (String profileName) {
 
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_PROFILE_NAME + " =?";
 
         return this.database.rawQuery(query, new String[] { profileName });
+
+    }
+
+    /*
+    * @method getAllProfiles
+    * */
+    public Cursor getAllProfiles () {
+
+        String query = "SELECT * FROM " + TABLE_NAME;
+
+        return this.database.rawQuery(query, new String[] {});
 
     }
 
@@ -74,7 +87,7 @@ public class FavouritesTable {
         values.put(COLUMN_PROFILE_EMAIL, model.getValue("email"));
         values.put(COLUMN_PROFILE_EXT, model.getValue("ext"));
         values.put(COLUMN_PROFILE_POSITION, model.getValue("position"));
-        values.put(COLUMN_PROFILE_NICKNAME, model.getValue("nickname"));
+        values.put(COLUMN_PROFILE_NICKNAME, model.getValue("nicknames"));
         values.put(COLUMN_PROFILE_IMAGE, model.getValue("image"));
         values.put(COLUMN_PROFILE_INITIALS, model.getValue("initials"));
         values.put(COLUMN_PROFILE_OFFICE, model.getValue("office"));
@@ -111,6 +124,33 @@ public class FavouritesTable {
 
         this.database.update(TABLE_NAME, values, query, new String[] { String.valueOf(model.getIntValue("id")) });
 
+    }
+
+    /*
+    * @method doDelete
+    * @params Integer profileId
+    * */
+    public void doDelete (int profileId) {
+
+        String query = null;
+        String values[] = null;
+
+        if(profileId > -1) {
+
+            query = COLUMN_PROFILE_ID + " =?";
+            values = new String[]{ String.valueOf(profileId) };
+
+        }
+
+        this.database.delete(TABLE_NAME, query, values);
+
+    }
+
+    /*
+    * @method close
+    * */
+    public void close () {
+        this.database.close();
     }
 
 }
