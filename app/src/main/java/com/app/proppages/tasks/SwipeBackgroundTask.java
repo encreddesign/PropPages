@@ -4,10 +4,9 @@ import android.os.Handler;
 import android.util.Log;
 
 import com.app.proppages.BaseActivity;
-import com.app.proppages.callbacks.ImageCacheCallback;
 import com.app.proppages.enums.ContentTypes;
 import com.app.proppages.enums.Routes;
-import com.app.proppages.http.OnDoneImageCache;
+import com.app.proppages.http.images.OnDoneImageCache;
 import com.app.proppages.utils.UtilBase;
 import com.app.proppages.utils.UtilJson;
 import com.app.proppages.view.ProfilesFragment;
@@ -24,11 +23,8 @@ public class SwipeBackgroundTask extends HttpTaskAbstract implements Runnable {
 
     private Handler mUiHandler;
 
-    public SwipeBackgroundTask init (Handler handler) {
-
+    SwipeBackgroundTask (Handler handler) {
         this.mUiHandler = handler;
-        return this;
-
     }
 
     @Override
@@ -105,7 +101,7 @@ public class SwipeBackgroundTask extends HttpTaskAbstract implements Runnable {
     * @method newInstance
     * */
     public static SwipeBackgroundTask newInstance ( Handler uiHandler ) {
-        return new SwipeBackgroundTask().init( uiHandler );
+        return new SwipeBackgroundTask( uiHandler );
     }
 
 }

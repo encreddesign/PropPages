@@ -4,7 +4,8 @@ import android.app.Activity;
 import android.os.Handler;
 import android.util.Log;
 
-import com.app.proppages.http.OnDoneImageCache;
+import com.app.proppages.BaseActivity;
+import com.app.proppages.http.images.OnDoneImageCache;
 import com.app.proppages.tasks.UpdateForegroundTask;
 import com.app.proppages.utils.UtilBase;
 import com.app.proppages.utils.UtilJson;
@@ -22,12 +23,10 @@ public class ImageCacheCallback implements OnDoneImageCache {
     private Activity activity;
     private Handler mHandler;
 
-    public ImageCacheCallback init ( Activity activity, Handler handler ) {
+    ImageCacheCallback ( Activity activity, Handler handler ) {
 
         this.activity = activity;
         this.mHandler = handler;
-
-        return this;
 
     }
 
@@ -66,7 +65,7 @@ public class ImageCacheCallback implements OnDoneImageCache {
     * @method newInstance
     * */
     public static ImageCacheCallback newInstance ( Activity activity, Handler handler ) {
-        return new ImageCacheCallback().init( activity, handler );
+        return new ImageCacheCallback( activity, handler );
     }
 
 }

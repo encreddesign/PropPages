@@ -19,12 +19,10 @@ public class OnPreTask implements Runnable {
     private Activity activity;
     private String message;
 
-    public OnPreTask init ( String message, Activity activity ) {
+    OnPreTask ( String message, Activity activity ) {
 
         this.activity = activity;
         this.message = message;
-
-        return this;
 
     }
 
@@ -50,7 +48,7 @@ public class OnPreTask implements Runnable {
     * @method newInstance
     * */
     public static OnPreTask newInstance ( String message, Activity activity ) {
-        return new OnPreTask().init( message, activity );
+        return new OnPreTask( message, activity );
     }
 
 }

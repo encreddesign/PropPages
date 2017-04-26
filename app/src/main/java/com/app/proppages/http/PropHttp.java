@@ -43,14 +43,12 @@ public class PropHttp {
     private DefaultHttpClient dHttpClient;
     private List<NameValuePair> httpPostValues;
 
-    public PropHttp init ( Context context, PropNetwork network ) {
+    PropHttp ( Context context, PropNetwork network ) {
 
         this.pNetwork = network;
         this.context = context;
         this.dHttpClient = new DefaultHttpClient();
         this.httpPostValues = new ArrayList<NameValuePair>();
-
-        return this;
 
     }
 
@@ -104,7 +102,7 @@ public class PropHttp {
         final HttpPost post = new HttpPost(this.url);
         try {
 
-            if( !this.pNetwork.isOnline() )
+            if( !this.pNetwork.check(this.context).isOnline() )
                 throw new NetworkException("Device is offline");
 
             post.setHeader( "Content-Type", this.contentType );
@@ -200,7 +198,7 @@ public class PropHttp {
     * @method newInstance
     * */
     public static PropHttp newInstance ( Context context ) {
-        return new PropHttp().init( context, PropNetwork.newInstance() );
+        return new PropHttp( context, PropNetwork.newInstance() );
     }
 
 }

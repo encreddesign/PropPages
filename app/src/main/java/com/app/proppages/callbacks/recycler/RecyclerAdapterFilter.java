@@ -21,15 +21,13 @@ public class RecyclerAdapterFilter implements RecyclerFilterInterface {
 
     private final String mFilterType = "name";
 
-    public RecyclerAdapterFilter init ( RecyclerView view, List<ProfileModel> adapter ) {
+    RecyclerAdapterFilter ( RecyclerView view, List<ProfileModel> adapter ) {
 
         this.mRecyclerView = view;
         this.mProfileData = adapter;
 
         this.mCopyData = new ArrayList<ProfileModel>();
         this.mCopyData.addAll(this.mProfileData);
-
-        return this;
 
     }
 
@@ -98,7 +96,7 @@ public class RecyclerAdapterFilter implements RecyclerFilterInterface {
     * @method newInstance
     * */
     public static RecyclerAdapterFilter newInstance ( RecyclerView view, List<ProfileModel> adapter ) {
-        return new RecyclerAdapterFilter().init( view, adapter );
+        return new RecyclerAdapterFilter( view, adapter );
     }
 
 }

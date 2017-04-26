@@ -20,12 +20,10 @@ public class UpdateForegroundTask implements Runnable {
     private Activity activity;
     private List<ProfileModel> data;
 
-    public UpdateForegroundTask init ( Activity activity, List<ProfileModel> data ) {
+    UpdateForegroundTask ( Activity activity, List<ProfileModel> data ) {
 
         this.data = data;
         this.activity = activity;
-
-        return this;
 
     }
 
@@ -51,7 +49,7 @@ public class UpdateForegroundTask implements Runnable {
     * @method newInstance
     * */
     public static UpdateForegroundTask newInstance ( Activity activity, List<ProfileModel> data ) {
-        return new UpdateForegroundTask().init( activity, data );
+        return new UpdateForegroundTask( activity, data );
     }
 
 }
